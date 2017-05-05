@@ -23,6 +23,7 @@ public class Blog extends AbstractEntity {
     private String name;
     private String description;
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BLOG_ID")
     private Set<Category> categorySet = new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
@@ -36,5 +37,13 @@ public class Blog extends AbstractEntity {
 
     public void removeCategory(Category category) {
         this.categorySet.remove(category);
+    }
+
+    public void addComment(Comment comment) {
+        this.commentSet.add(comment);
+    }
+
+    public void removeComment(Comment comment) {
+        this.commentSet.remove(comment);
     }
 }

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * Created by Mateusz Dalgiewicz on 01.05.2017.
@@ -22,8 +23,13 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     private Long id;
+    private final String uuid;
     @CreatedDate
     private LocalDateTime createdDateTime;
     @LastModifiedDate
     private LocalDateTime updatedDateTime;
+
+    AbstractEntity() {
+        uuid = UUID.randomUUID().toString();
+    }
 }

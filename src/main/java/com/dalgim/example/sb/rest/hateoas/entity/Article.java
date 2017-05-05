@@ -22,11 +22,16 @@ public class Article extends AbstractEntity {
     private String description;
     private String content;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
     @OneToMany
     private Set<Comment> commentSet = new HashSet<>();
+
+    public void addComment(Comment comment) {
+        this.commentSet.add(comment);
+    }
+
+    public void removeComment(Comment comment) {
+        this.commentSet.remove(comment);
+    }
 }

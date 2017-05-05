@@ -20,4 +20,11 @@ public class Comment extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
+
+    private Comment() {};
+
+    public Comment(String content, User author) {
+        this.content = content;
+        this.author = author;
+    }
 }
