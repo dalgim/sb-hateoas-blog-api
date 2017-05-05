@@ -2,6 +2,7 @@ package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ApiMapResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.EntityLinks;
@@ -38,9 +39,13 @@ public class ApiMapAssembler {
                 .withRel(relProvider.getCollectionResourceRelFor(UserResource.class));
         final Link blogControllerLink = entityLinks.linkToCollectionResource(BlogResource.class)
                 .withRel(relProvider.getCollectionResourceRelFor(BlogResource.class));
+        final Link commentControllerLink = entityLinks.linkToCollectionResource(CommentResource.class)
+                .withRel(relProvider.getCollectionResourceRelFor(CommentResource.class));
+
         final ApiMapResource apiMapResource = new ApiMapResource(name, version, author);
         apiMapResource.add(blogControllerLink);
         apiMapResource.add(userControllerLink);
+        apiMapResource.add(commentControllerLink);
         return apiMapResource;
     }
 }
