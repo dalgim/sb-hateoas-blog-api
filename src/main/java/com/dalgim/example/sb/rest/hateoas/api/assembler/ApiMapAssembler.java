@@ -1,6 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ApiMapResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
@@ -41,11 +42,14 @@ public class ApiMapAssembler {
                 .withRel(relProvider.getCollectionResourceRelFor(BlogResource.class));
         final Link commentControllerLink = entityLinks.linkToCollectionResource(CommentResource.class)
                 .withRel(relProvider.getCollectionResourceRelFor(CommentResource.class));
+        final Link articleControllerLink = entityLinks.linkToCollectionResource(ArticleResource.class)
+                .withRel(relProvider.getCollectionResourceRelFor(ArticleResource.class));
 
         final ApiMapResource apiMapResource = new ApiMapResource(name, version, author);
         apiMapResource.add(blogControllerLink);
         apiMapResource.add(userControllerLink);
         apiMapResource.add(commentControllerLink);
+        apiMapResource.add(articleControllerLink);
         return apiMapResource;
     }
 }
