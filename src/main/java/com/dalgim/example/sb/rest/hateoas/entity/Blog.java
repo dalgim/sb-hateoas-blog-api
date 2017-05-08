@@ -1,11 +1,15 @@
 package com.dalgim.example.sb.rest.hateoas.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
@@ -16,19 +20,26 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class Blog extends AbstractEntity {
 
-    @Column(unique = true)
+    @Column(name = "NAME", length = 80, nullable = false)
     private String name;
+    @Column(name = "DESCRIPTION")
+    @Lob
     private String description;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BLOG_ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog")
     private Set<Category> categorySet = new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "AUTHOR_ID")
-    private User author;
-    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OWNER_ID")
+    private User owner;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "BLOG_COMMENT",
+            joinColumns = @JoinColumn(name = "BLOG_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COMMENT_ID")
+    )
     private Set<Comment> commentSet = new HashSet<>();
 
     public void addCategory(Category category) {
