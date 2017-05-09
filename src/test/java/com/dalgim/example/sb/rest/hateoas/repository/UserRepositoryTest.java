@@ -3,8 +3,6 @@ package com.dalgim.example.sb.rest.hateoas.repository;
 import com.dalgim.example.sb.rest.hateoas.AppProfiles;
 import com.dalgim.example.sb.rest.hateoas.entity.Comment;
 import com.dalgim.example.sb.rest.hateoas.entity.User;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,8 @@ public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Test
     public void shouldSaveUser() throws Exception {
@@ -66,5 +66,25 @@ public class UserRepositoryTest {
         assertThat(userByLogin.getFirstName()).isEqualTo(user.getFirstName());
         assertThat(userByLogin.getLastName()).isEqualTo(user.getLastName());
         assertThat(userByLogin.getPassword()).isEqualTo(user.getPassword());
+        userByLogin.getCommentSet()
+                .forEach(comment1 -> assertThat(comment1.getAuthor()).isEqualTo(user));
+    }
+
+    @Test
+    public void shouldDeleteUserAndComments() throws Exception {
+        User user = new User();
+        user.setLogin("John.Smith");
+        user.setFirstName("John");
+        user.setLastName("Smith");
+        user.setPassword("P@ssw0rd");
+        Comment comment = new Comment("Test comment", user);
+        user.addComment(comment);
+
+        userRepository.save(user);
+        userRepository.delete(user);
+
+        assertThat(userRepository.findByLogin(user.getLogin())).isNull();
+        user.getCommentSet()
+                .forEach(comment1 -> assertThat(commentRepository.findOne(comment.getId())).isNull());
     }
 }
