@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @ExposesResourceFor(ArticleResource.class)
 @RestController
-@RequestMapping(value = "articles", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/articles", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ArticleController {
 
     private final ArticleRepository articleRepository;

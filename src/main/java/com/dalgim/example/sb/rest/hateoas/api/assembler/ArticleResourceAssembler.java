@@ -19,6 +19,7 @@ public class ArticleResourceAssembler extends ResourceAssemblerSupport<Article, 
     @Override
     public ArticleResource toResource(Article article) {
         ArticleResource articleResource = createResourceWithId(article.getId(), article);
+        articleResource.setId(article.getId());
         articleResource.setContent(article.getContent());
         articleResource.setDescription(article.getDescription());
         articleResource.setCreatedDate(article.getCreatedDateTime());

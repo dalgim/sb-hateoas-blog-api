@@ -19,8 +19,11 @@ public class BlogResourceAssembler extends ResourceAssemblerSupport<Blog, BlogRe
     @Override
     public BlogResource toResource(Blog blog) {
         BlogResource blogResource = createResourceWithId(blog.getId(), blog);
+        blogResource.setId(blog.getId());
         blogResource.setName(blog.getName());
         blogResource.setDescription(blog.getDescription());
+        blogResource.setCreatedDate(blog.getCreatedDateTime());
+        blogResource.setLastUpdateDate(blog.getUpdatedDateTime());
         return blogResource;
     }
 }

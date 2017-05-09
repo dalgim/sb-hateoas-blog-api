@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Relation(value = "article", collectionRelation = "articles")
 public class ArticleResource extends ResourceSupport {
 
+    private Long id;
     private String name;
     private String description;
     private String content;
