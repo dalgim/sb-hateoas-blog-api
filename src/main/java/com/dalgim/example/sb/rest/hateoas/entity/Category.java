@@ -2,6 +2,8 @@ package com.dalgim.example.sb.rest.hateoas.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,13 +26,14 @@ public class Category extends AbstractEntity {
     @Column(name = "DESCRIPTION")
     @Lob
     private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Article> articleSet = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
     private Blog blog;
 
     public void addArticle(Article article) {
         this.articleSet.add(article);
+        article.setCategory(this);
     }
 
     public void removeArticle(Article article) {

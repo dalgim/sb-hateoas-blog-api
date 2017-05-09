@@ -27,7 +27,7 @@ public class Blog extends AbstractEntity {
     @Column(name = "DESCRIPTION")
     @Lob
     private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = CascadeType.ALL)
     private Set<Category> categorySet = new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "OWNER_ID")
@@ -36,12 +36,16 @@ public class Blog extends AbstractEntity {
     @JoinTable(
             name = "BLOG_COMMENT",
             joinColumns = @JoinColumn(name = "BLOG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "COMMENT_ID")
-    )
+            inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
     private Set<Comment> commentSet = new HashSet<>();
+
+    public Blog(User owner) {
+        this.owner = owner;
+    }
 
     public void addCategory(Category category) {
         this.categorySet.add(category);
+        category.setBlog(this);
     }
 
     public void removeCategory(Category category) {
