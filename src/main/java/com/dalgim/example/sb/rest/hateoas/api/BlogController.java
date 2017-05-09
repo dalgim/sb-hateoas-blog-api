@@ -37,7 +37,7 @@ public class BlogController {
         return ResponseEntity.ok(blogResource);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Resources<BlogResource>> getAll() {
         final Iterable<Blog> allBlog = blogRepository.findAll();
         final List<BlogResource> allBlogResource = blogResourceAssembler.toResources(allBlog);

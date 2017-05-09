@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.ok(userResource);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Resources<UserResource>> getAll() {
         final Iterable<User> allUser = userRepository.findAll();
         final List<UserResource> allUserResource = userResourceAssembler.toResources(allUser);
