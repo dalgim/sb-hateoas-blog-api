@@ -47,7 +47,6 @@ public class Article extends AbstractEntity {
     private Article() {}
 
     public Article(User author) {
-        this.category = category;
         this.author = author;
     }
 

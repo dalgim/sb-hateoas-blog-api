@@ -34,31 +34,6 @@ public class CategoryRepositoryTest {
     private ArticleRepository articleRepository;
 
     @Test
-    public void shouldSaveCategory() throws Exception {
-
-        User user = new User();
-        user.setLogin("John.Smith");
-        user.setFirstName("John");
-        user.setLastName("Smith");
-        user.setPassword("P@ssw0rd");
-        userRepository.save(user);
-        Blog blog = new Blog(user);
-        blog.setName("JavaTech");
-        blog.setDescription("Examples of Java");
-        blogRepository.save(blog);
-        Category category = new Category();
-        category.setDescription("Test category description");
-        category.setName("Test category");
-        category.setBlog(blog);
-
-        categoryRepository.save(category);
-
-        Category caegorySaved = categoryRepository.findOne(category.getId());
-        assertThat(caegorySaved).isEqualTo(category);
-        assertThat(caegorySaved.getBlog()).isEqualTo(blog);
-    }
-
-    @Test
     public void shouldDeleteCategoryAndNotDeleteBlog() throws Exception {
         User user = new User();
         user.setLogin("John.Smith");

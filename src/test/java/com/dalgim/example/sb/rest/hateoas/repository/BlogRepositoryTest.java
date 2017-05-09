@@ -33,25 +33,6 @@ public class BlogRepositoryTest {
     @Autowired
     private CommentRepository commentRepository;
 
-    @Test
-    public void shouldSaveBlog() throws Exception {
-
-        User user = new User();
-        user.setLogin("John.Smith");
-        user.setFirstName("John");
-        user.setLastName("Smith");
-        user.setPassword("P@ssw0rd");
-        userRepository.save(user);
-        Blog blog = new Blog(user);
-        blog.setName("JavaTech");
-        blog.setDescription("Examples of Java");
-
-        blogRepository.save(blog);
-
-        Blog blogSaved = blogRepository.findOne(blog.getId());
-        assertThat(blogSaved).isNotNull();
-        assertThat(blogSaved.getOwner()).isEqualTo(user);
-    }
 
     @Test
     public void shouldDeleteBlogAndNotDeleteOwner() throws Exception {

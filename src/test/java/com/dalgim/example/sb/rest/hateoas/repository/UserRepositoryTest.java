@@ -26,26 +26,6 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private CommentRepository commentRepository;
-
-    @Test
-    public void shouldSaveUser() throws Exception {
-        User user = new User();
-        user.setLogin("John.Smith");
-        user.setFirstName("John");
-        user.setLastName("Smith");
-        user.setPassword("P@ssw0rd");
-
-        userRepository.save(user);
-        User userByLogin = userRepository.findByLogin("John.Smith");
-
-        assertThat(userByLogin.getLogin()).isEqualTo(user.getLogin());
-        assertThat(userByLogin.getId()).isNotNull();
-        assertThat(userByLogin.getCommentSet()).isEmpty();
-        assertThat(userByLogin.getFirstName()).isEqualTo(user.getFirstName());
-        assertThat(userByLogin.getLastName()).isEqualTo(user.getLastName());
-        assertThat(userByLogin.getPassword()).isEqualTo(user.getPassword());
-    }
-
     @Test
     public void shouldSaveUserWithComments() throws Exception {
         User user = new User();
