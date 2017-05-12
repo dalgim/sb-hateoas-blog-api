@@ -1,7 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas.api;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
-import com.dalgim.example.sb.rest.hateoas.service.CommentService;
+import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Resources;

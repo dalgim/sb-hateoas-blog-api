@@ -1,4 +1,4 @@
-package com.dalgim.example.sb.rest.hateoas.service;
+package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.CategoryResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
