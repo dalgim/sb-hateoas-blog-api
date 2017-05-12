@@ -18,7 +18,12 @@ public class ArticleResourceAssembler extends ResourceAssemblerSupport<Article, 
 
     @Override
     public ArticleResource toResource(Article article) {
-        ArticleResource articleResource = createResourceWithId(article.getId(), article);
+        return createResourceWithId(article.getId(), article);
+    }
+
+    @Override
+    protected ArticleResource instantiateResource(Article article) {
+        ArticleResource articleResource = new ArticleResource();
         articleResource.setContent(article.getContent());
         articleResource.setDescription(article.getDescription());
         articleResource.setCreatedDate(article.getCreatedDateTime());
@@ -28,6 +33,4 @@ public class ArticleResourceAssembler extends ResourceAssemblerSupport<Article, 
         articleResource.setCategoryId(article.getCategory() != null ? article.getCategory().getId() : null);
         return articleResource;
     }
-
-
 }

@@ -18,7 +18,12 @@ public class CommentResourceAssembler extends ResourceAssemblerSupport<Comment, 
 
     @Override
     public CommentResource toResource(Comment comment) {
-        CommentResource commentResource = createResourceWithId(comment.getId(), comment);
+        return createResourceWithId(comment.getId(), comment);
+    }
+
+    @Override
+    protected CommentResource instantiateResource(Comment comment) {
+        CommentResource commentResource = new CommentResource();
         commentResource.setContent(comment.getContent());
         commentResource.setCreatedDate(comment.getCreatedDateTime());
         commentResource.setLastUpdateDate(comment.getUpdatedDateTime());
