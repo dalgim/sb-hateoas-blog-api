@@ -3,6 +3,7 @@ package com.dalgim.example.sb.rest.hateoas.api.assembler;
 import com.dalgim.example.sb.rest.hateoas.api.BlogController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Blog;
+import com.google.common.base.Preconditions;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +19,14 @@ public class BlogResourceAssembler extends ResourceAssemblerSupport<Blog, BlogRe
 
     @Override
     public BlogResource toResource(Blog blog) {
+        Preconditions.checkNotNull(blog, "Blog cannot be null.");
+
         return createResourceWithId(blog.getId(), blog);
     }
 
     @Override
     protected BlogResource instantiateResource(Blog blog) {
-        BlogResource blogResource = new BlogResource();
+       BlogResource blogResource = new BlogResource();
         blogResource.setName(blog.getName());
         blogResource.setDescription(blog.getDescription());
         blogResource.setCreatedDate(blog.getCreatedDateTime());
