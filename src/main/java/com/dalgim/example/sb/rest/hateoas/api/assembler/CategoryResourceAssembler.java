@@ -19,7 +19,6 @@ public class CategoryResourceAssembler extends ResourceAssemblerSupport<Category
     @Override
     public CategoryResource toResource(Category category) {
         CategoryResource categoryResource = createResourceWithId(category.getId(), category);
-        categoryResource.setId(category.getId());
         categoryResource.setCreatedDate(category.getCreatedDateTime());
         categoryResource.setLastUpdateDate(category.getUpdatedDateTime());
         categoryResource.setName(category.getName());

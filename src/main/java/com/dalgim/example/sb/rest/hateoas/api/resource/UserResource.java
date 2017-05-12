@@ -13,7 +13,6 @@ import org.springframework.hateoas.core.Relation;
 @Relation(value = "user", collectionRelation = "users")
 public class UserResource extends ResourceSupport {
 
-    private Long id;
     private String firstName;
     private String lastName;
     private String login;

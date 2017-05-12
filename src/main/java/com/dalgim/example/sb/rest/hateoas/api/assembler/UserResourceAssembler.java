@@ -19,7 +19,6 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
     @Override
     public UserResource toResource(User user) {
         UserResource userResource = createResourceWithId(user.getId(), user);
-        userResource.setId(user.getId());
         userResource.setPassword(user.getPassword());
         userResource.setLogin(user.getLogin());
         userResource.setLastName(user.getLastName());

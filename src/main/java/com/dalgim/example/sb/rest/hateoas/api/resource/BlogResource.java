@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Relation(value = "blog", collectionRelation = "blogs")
 public class BlogResource extends ResourceSupport {
 
-    private Long id;
     private String name;
     private String description;
     private LocalDateTime createdDate;

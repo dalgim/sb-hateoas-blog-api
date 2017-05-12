@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Relation(value = "category", collectionRelation = "categories")
 public class CategoryResource extends ResourceSupport {
 
-    private Long id;
     private String name;
     private String description;
     private LocalDateTime createdDate;

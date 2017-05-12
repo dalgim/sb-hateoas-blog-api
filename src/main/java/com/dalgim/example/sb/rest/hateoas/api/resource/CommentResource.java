@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Relation(value = "comment", collectionRelation = "comments")
 public class CommentResource extends ResourceSupport {
 
-    private Long id;
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime lastUpdateDate;
