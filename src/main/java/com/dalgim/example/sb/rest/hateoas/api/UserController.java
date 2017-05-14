@@ -1,5 +1,6 @@
 package com.dalgim.example.sb.rest.hateoas.api;
 
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.api.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getById(@PathVariable final Long id) {

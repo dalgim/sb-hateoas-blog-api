@@ -24,6 +24,9 @@
 		<java.version>1.8</java.version>
 
 		<guava.version>22.0-rc1</guava.version>
+		<spock.version>1.0-groovy-2.4</spock.version>
+		<groovy.version>2.4.4</groovy.version>
+		<cglib.version>3.2.5</cglib.version>
 	</properties>
 
 	<dependencies>
@@ -45,6 +48,24 @@
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>${groovy.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.version}</version>
 			<scope>test</scope>
 		</dependency>
 
