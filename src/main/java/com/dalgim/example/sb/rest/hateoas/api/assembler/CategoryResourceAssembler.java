@@ -4,17 +4,17 @@ import com.dalgim.example.sb.rest.hateoas.api.CategoryController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Category;
 import com.google.common.base.Preconditions;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Mateusz Dalgiewicz on 09.05.2017.
  */
 @Component
-public class CategoryResourceAssembler extends ResourceAssemblerSupport<Category, CategoryResource> {
+public class CategoryResourceAssembler extends AbstractResourceAssembler<Category, CategoryResource, CategoryController> {
 
-    public CategoryResourceAssembler() {
-        super(CategoryController.class, CategoryResource.class);
+    public CategoryResourceAssembler(final EntityLinks entityLinks) {
+        super(CategoryController.class, CategoryResource.class, entityLinks);
     }
 
     @Override

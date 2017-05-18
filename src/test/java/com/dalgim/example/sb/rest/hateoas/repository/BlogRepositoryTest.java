@@ -102,6 +102,7 @@ public class BlogRepositoryTest {
         blog.addCategory(category1);
         blogRepository.save(blog);
 
+        user.remove(blog);
         blogRepository.delete(blog);
 
         assertThat(blogRepository.findOne(blog.getId())).isNull();
@@ -144,7 +145,7 @@ public class BlogRepositoryTest {
         Comment comment = new Comment("TestContent", user);
         blog.addComment(comment);
         blogRepository.save(blog);
-
+        user.remove(blog);
         blogRepository.delete(blog);
 
         assertThat(blogRepository.findOne(blog.getId())).isNull();

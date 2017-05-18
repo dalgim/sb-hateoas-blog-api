@@ -4,17 +4,17 @@ import com.dalgim.example.sb.rest.hateoas.api.CommentController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Comment;
 import com.google.common.base.Preconditions;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Mateusz Dalgiewicz on 05.05.2017.
  */
 @Component
-public class CommentResourceAssembler extends ResourceAssemblerSupport<Comment, CommentResource> {
+public class CommentResourceAssembler extends AbstractResourceAssembler<Comment, CommentResource, CommentController> {
 
-    public CommentResourceAssembler() {
-        super(CommentController.class, CommentResource.class);
+    public CommentResourceAssembler(final EntityLinks entityLinks) {
+        super(CommentController.class, CommentResource.class, entityLinks);
     }
 
     @Override

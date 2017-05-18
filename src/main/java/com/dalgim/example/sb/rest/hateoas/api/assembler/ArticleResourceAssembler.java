@@ -4,17 +4,17 @@ import com.dalgim.example.sb.rest.hateoas.api.ArticleController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Article;
 import com.google.common.base.Preconditions;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Mateusz Dalgiewicz on 08.05.2017.
  */
 @Component
-public class ArticleResourceAssembler extends ResourceAssemblerSupport<Article, ArticleResource> {
+public class ArticleResourceAssembler extends AbstractResourceAssembler<Article, ArticleResource, ArticleController> {
 
-    public ArticleResourceAssembler() {
-        super(ArticleController.class, ArticleResource.class);
+    public ArticleResourceAssembler(final EntityLinks entityLinks) {
+        super(ArticleController.class, ArticleResource.class, entityLinks);
     }
 
     @Override

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BlogResourceAssembler extends AbstractResourceAssembler<Blog, BlogResource, BlogController> {
 
-    public BlogResourceAssembler(EntityLinks entityLinks) {
+    public BlogResourceAssembler(final EntityLinks entityLinks) {
         super(BlogController.class, BlogResource.class, entityLinks);
     }
 
