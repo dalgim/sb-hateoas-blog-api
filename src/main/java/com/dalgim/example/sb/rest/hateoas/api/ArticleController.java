@@ -28,7 +28,7 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getById(id));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<ArticleResource>> getAll() {
         return ResponseEntity.ok(articleService.getAll());
     }

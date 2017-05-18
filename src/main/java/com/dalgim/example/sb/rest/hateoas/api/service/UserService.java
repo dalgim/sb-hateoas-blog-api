@@ -1,5 +1,6 @@
 package com.dalgim.example.sb.rest.hateoas.api.service;
 
+import com.dalgim.example.sb.rest.hateoas.api.assembler.BlogResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.assembler.UserResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Blog;
@@ -25,13 +26,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserResourceAssembler userResourceAssembler;
+    private final BlogResourceAssembler blogResourceAssembler;
 
     public UserResource getById(Long id) {
         Preconditions.checkNotNull(id, "User id cannot be null.");
 
         final User user = userRepository.findOne(id);
-        final Set<Blog> blogSet = user.getBlogSet();
-        return userResourceAssembler.toResource(user);
+        UserResource userResource = userResourceAssembler.toResource(user);
+        for (Blog blog : user.getBlogSet()) {
+            userResource.add(blogResourceAssembler.linkToSingleResource(blog).withRel("authored-blogs"));
+        }
+        return userResource;
     }
 
     public Resources<UserResource> getAll() {

@@ -28,7 +28,7 @@ public class BlogController {
         return ResponseEntity.ok(blogService.getById(id));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<BlogResource>> getAll() {
         return ResponseEntity.ok(blogService.getAll());
     }

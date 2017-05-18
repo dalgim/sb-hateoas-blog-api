@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ExposesResourceFor(UserResource.class)
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     private final UserService userService;

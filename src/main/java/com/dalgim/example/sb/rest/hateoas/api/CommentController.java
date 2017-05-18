@@ -28,7 +28,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getById(id));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<CommentResource>> getAll() {
         return ResponseEntity.ok(commentService.getAll());
     }

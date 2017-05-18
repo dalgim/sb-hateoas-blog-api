@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<CategoryResource>> getAll() {
         return ResponseEntity.ok(categoryService.getAll());
     }

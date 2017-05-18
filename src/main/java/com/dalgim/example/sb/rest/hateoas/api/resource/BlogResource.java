@@ -1,5 +1,6 @@
 package com.dalgim.example.sb.rest.hateoas.api.resource;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.ResourceSupport;

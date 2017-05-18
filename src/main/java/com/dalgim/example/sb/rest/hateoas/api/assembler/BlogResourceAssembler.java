@@ -4,17 +4,17 @@ import com.dalgim.example.sb.rest.hateoas.api.BlogController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Blog;
 import com.google.common.base.Preconditions;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Mateusz Dalgiewicz on 03.05.2017.
  */
 @Component
-public class BlogResourceAssembler extends ResourceAssemblerSupport<Blog, BlogResource> {
+public class BlogResourceAssembler extends AbstractResourceAssembler<Blog, BlogResource, BlogController> {
 
-    public BlogResourceAssembler() {
-        super(BlogController.class, BlogResource.class);
+    public BlogResourceAssembler(EntityLinks entityLinks) {
+        super(BlogController.class, BlogResource.class, entityLinks);
     }
 
     @Override

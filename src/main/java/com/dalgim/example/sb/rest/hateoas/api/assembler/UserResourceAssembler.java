@@ -4,25 +4,17 @@ import com.dalgim.example.sb.rest.hateoas.api.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.entity.User;
 import com.google.common.base.Preconditions;
-import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityLinks;
-import org.springframework.hateoas.RelProvider;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Mateusz Dalgiewicz on 01.05.2017.
  */
 @Component
-public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserResource> {
+public class UserResourceAssembler extends AbstractResourceAssembler<User, UserResource, UserController>{
 
-    protected final RelProvider relProvider;
-    protected final EntityLinks entityLinks;
-
-    public UserResourceAssembler(RelProvider relProvider, EntityLinks entityLinks) {
-        super(UserController.class, UserResource.class);
-        this.relProvider = relProvider;
-        this.entityLinks = entityLinks;
+    public UserResourceAssembler(final EntityLinks entityLinks) {
+        super(UserController.class, UserResource.class, entityLinks);
     }
 
     @Override
