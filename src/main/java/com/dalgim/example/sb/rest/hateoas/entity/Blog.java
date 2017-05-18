@@ -39,8 +39,11 @@ public class Blog extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
     private Set<Comment> commentSet = new HashSet<>();
 
+    private Blog() {}
+
     public Blog(User owner) {
         this.owner = owner;
+        owner.addBlog(this);
     }
 
     public void addCategory(Category category) {

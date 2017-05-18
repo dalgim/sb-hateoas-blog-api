@@ -37,6 +37,16 @@ public class User extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "COMMENT_ID")
     )
     private Set<Comment> commentSet = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")
+    private Set<Blog> blogSet = new HashSet<>();
+
+    public void addBlog(Blog blog) {
+        this.blogSet.add(blog);
+    }
+
+    public void remove(Blog blog) {
+        this.blogSet.remove(blog);
+    }
 
     public void addComment(Comment comment) {
         this.commentSet.add(comment);

@@ -4,6 +4,9 @@ import com.dalgim.example.sb.rest.hateoas.api.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.entity.User;
 import com.google.common.base.Preconditions;
+import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.RelProvider;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +16,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserResource> {
 
-    public UserResourceAssembler() {
+    protected final RelProvider relProvider;
+    protected final EntityLinks entityLinks;
+
+    public UserResourceAssembler(RelProvider relProvider, EntityLinks entityLinks) {
         super(UserController.class, UserResource.class);
+        this.relProvider = relProvider;
+        this.entityLinks = entityLinks;
     }
 
     @Override
@@ -31,6 +39,6 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
         userResource.setLogin(user.getLogin());
         userResource.setLastName(user.getLastName());
         userResource.setFirstName(user.getFirstName());
-        return super.instantiateResource(user);
+        return userResource;
     }
 }

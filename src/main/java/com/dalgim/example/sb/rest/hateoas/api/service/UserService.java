@@ -2,6 +2,7 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.UserResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
+import com.dalgim.example.sb.rest.hateoas.entity.Blog;
 import com.dalgim.example.sb.rest.hateoas.entity.User;
 import com.dalgim.example.sb.rest.hateoas.repository.UserRepository;
 import com.google.common.base.Preconditions;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Mateusz Dalgiewicz on 12.05.2017.
@@ -28,6 +30,7 @@ public class UserService {
         Preconditions.checkNotNull(id, "User id cannot be null.");
 
         final User user = userRepository.findOne(id);
+        final Set<Blog> blogSet = user.getBlogSet();
         return userResourceAssembler.toResource(user);
     }
 

@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getById(id));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<UserResource>> getAll() {
         return ResponseEntity.ok(userService.getAll());
     }
