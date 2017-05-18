@@ -1,6 +1,5 @@
 package com.dalgim.example.sb.rest.hateoas.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

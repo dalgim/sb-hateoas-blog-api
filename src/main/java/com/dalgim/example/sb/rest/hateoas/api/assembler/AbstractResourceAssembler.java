@@ -1,6 +1,5 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
-import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.entity.AbstractEntity;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Link;
@@ -12,16 +11,13 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
  */
 public abstract class AbstractResourceAssembler<T extends AbstractEntity, D extends ResourceSupport, K> extends ResourceAssemblerSupport<T, D> {
 
-    protected final Class<K> controllerClass;
+    protected final Class<K> controllerType;
+    protected final Class<D> resourceType;
     protected final EntityLinks entityLinks;
-    private final Class<D> resourceType;
 
-    public AbstractResourceAssembler(
-            Class<K> controllerType,
-            Class<D> resourceType,
-            EntityLinks entityLinks) {
+    public AbstractResourceAssembler(Class<K> controllerType, Class<D> resourceType, EntityLinks entityLinks) {
         super(controllerType, resourceType);
-        this.controllerClass = controllerType;
+        this.controllerType = controllerType;
         this.entityLinks = entityLinks;
         this.resourceType = resourceType;
     }
@@ -29,5 +25,4 @@ public abstract class AbstractResourceAssembler<T extends AbstractEntity, D exte
     public Link linkToSingleResource(T entity) {
         return entityLinks.linkToSingleResource(resourceType, String.valueOf(entity.getId()));
     }
-
 }
