@@ -1,7 +1,9 @@
 package com.dalgim.example.sb.rest.hateoas.api;
 
+import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
+import com.dalgim.example.sb.rest.hateoas.api.service.BlogService;
 import com.dalgim.example.sb.rest.hateoas.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final BlogService blogService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getById(@PathVariable final Long id) {
@@ -32,5 +35,10 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<UserResource>> getAll() {
         return ResponseEntity.ok(userService.getAll());
+    }
+
+    @RequestMapping(value = "/{id}/blogs", method = RequestMethod.GET)
+    public ResponseEntity<Resources<BlogResource>> getAllByOwnerId(@PathVariable Long id) {
+        return ResponseEntity.ok(blogService.getAllByOwnerId(id));
     }
 }
