@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Mateusz Dalgiewicz on 12.05.2017.
@@ -35,5 +36,13 @@ public class CategoryService {
         final Iterable<Category> allCategory = categoryRepository.findAll();
         final List<CategoryResource> allCategoryResource = categoryResourceAssembler.toResources(allCategory);
         return new Resources<>(allCategoryResource, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+    }
+
+    public Resources<CategoryResource> getAllByBlogId(Long blogId) {
+        Preconditions.checkNotNull(blogId, "Blog id cannot be null.");
+
+        final Set<Category> allCategories = categoryRepository.getAllByBlog_Id(blogId);
+        final List<CategoryResource> categoryResources = categoryResourceAssembler.toResources(allCategories);
+        return new Resources<>(categoryResources, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
     }
 }
