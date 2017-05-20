@@ -1,9 +1,11 @@
 package com.dalgim.example.sb.rest.hateoas.api;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.api.service.BlogService;
+import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import com.dalgim.example.sb.rest.hateoas.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
@@ -26,6 +28,7 @@ public class UserController {
 
     private final UserService userService;
     private final BlogService blogService;
+    private final CommentService commentService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getById(@PathVariable final Long id) {
@@ -40,5 +43,10 @@ public class UserController {
     @RequestMapping(value = "/{id}/blogs", method = RequestMethod.GET)
     public ResponseEntity<Resources<BlogResource>> getAllByOwnerId(@PathVariable Long id) {
         return ResponseEntity.ok(blogService.getAllByOwnerId(id));
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
+    public ResponseEntity<Resources<CommentResource>> getAllByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(commentService.getAllByUserId(id));
     }
 }
