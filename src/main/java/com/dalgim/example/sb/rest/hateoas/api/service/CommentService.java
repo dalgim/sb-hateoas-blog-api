@@ -27,9 +27,7 @@ public class CommentService extends AbstractService<Comment, CommentResource, Co
 
     public CommentResource getById(Long id) {
         Preconditions.checkNotNull(id, "Comment id cannot be null.");
-
-        final Comment comment = commentRepository.findOne(id);
-        return resourceAssembler.toResource(comment);
+        return toResource(commentRepository.findOne(id));
     }
 
     public Resources<CommentResource> getAll() {
@@ -38,7 +36,6 @@ public class CommentService extends AbstractService<Comment, CommentResource, Co
 
     public Resources<CommentResource> getAllByUserId(Long userId) {
         Preconditions.checkNotNull(userId, "User id cannot be null.");
-
         final Set<Comment> allCommentsByUserId = userRepository.findOne(userId).getCommentSet();
         return toResources(allCommentsByUserId);
     }

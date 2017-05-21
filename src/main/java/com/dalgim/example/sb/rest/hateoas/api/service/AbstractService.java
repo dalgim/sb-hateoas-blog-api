@@ -21,6 +21,10 @@ public abstract class AbstractService<E extends AbstractEntity, T extends Resour
         return new Resources<T>(resourceItems, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
     }
 
+    T toResource(E item) {
+        return resourceAssembler.toResource(item);
+    }
+
     @Autowired
     public void setResourceAssembler(AbstractResourceAssembler<E, T, K> resourceAssembler) {
         this.resourceAssembler = resourceAssembler;

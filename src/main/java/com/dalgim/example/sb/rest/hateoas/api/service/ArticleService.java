@@ -31,9 +31,7 @@ public class ArticleService extends AbstractService<Article, ArticleResource, Ar
 
     public ArticleResource getById(Long id) {
         Preconditions.checkNotNull(id, "Article id cannot be null.");
-
-        final Article article = articleRepository.findOne(id);
-        return resourceAssembler.toResource(article);
+        return toResource(articleRepository.findOne(id));
     }
 
     public Resources<ArticleResource> getAll() {
@@ -42,19 +40,16 @@ public class ArticleService extends AbstractService<Article, ArticleResource, Ar
 
     public Resources<ArticleResource> getAllByCategoryId(Long categoryId) {
         Preconditions.checkNotNull(categoryId, "Category id cannot be null.");
-
         return toResources(articleRepository.getAllByCategory_Id(categoryId));
     }
 
     public Resources<ArticleResource> getAllByAuthorId(Long authorId) {
         Preconditions.checkNotNull(authorId, "Author id cannot be null.");
-
         return toResources(articleRepository.getAllByAuthor_Id(authorId));
     }
 
     public Link newArticle(NewArticle newArticle) {
         Preconditions.checkNotNull(newArticle, "NewArticle object cannot be null.");
-
         final Category category = categoryRepository.findOneThrowable(newArticle.getCategoryId());
         final Article article = NewArticleMapper.map(newArticle);
         category.addArticle(article);

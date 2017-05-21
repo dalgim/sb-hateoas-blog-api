@@ -22,9 +22,7 @@ public class CategoryService extends AbstractService<Category, CategoryResource,
 
     public CategoryResource getByid(Long id) {
         Preconditions.checkNotNull(id, "Category id cannoe be null.");
-
-        Category category = categoryRepository.findOne(id);
-        return resourceAssembler.toResource(category);
+        return toResource(categoryRepository.findOne(id));
     }
 
     public Resources<CategoryResource> getAll() {
@@ -33,7 +31,6 @@ public class CategoryService extends AbstractService<Category, CategoryResource,
 
     public Resources<CategoryResource> getAllByBlogId(Long blogId) {
         Preconditions.checkNotNull(blogId, "Blog id cannot be null.");
-
         return toResources(categoryRepository.getAllByBlog_Id(blogId));
     }
 }

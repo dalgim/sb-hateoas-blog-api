@@ -28,9 +28,7 @@ public class BlogService extends AbstractService<Blog, BlogResource, BlogControl
 
     public BlogResource getById(Long id) {
         Preconditions.checkNotNull(id, "Blog id cannot be null.");
-
-        final Blog blog = blogRepository.findOneThrowable(id);
-        return resourceAssembler.toResource(blog);
+        return toResource(blogRepository.findOneThrowable(id));
     }
 
     public Resources<BlogResource> getAll() {
@@ -39,13 +37,11 @@ public class BlogService extends AbstractService<Blog, BlogResource, BlogControl
 
     public Resources<BlogResource> getAllByOwnerId(Long ownerId) {
         Preconditions.checkNotNull(ownerId, "Owner id cannot be null.");
-
         return toResources(blogRepository.getAllByOwner_Id(ownerId));
     }
 
     public Link newBlog(NewBlog newBlog) {
         Preconditions.checkNotNull(newBlog, "NewBlog object cannot be null.");
-
         final User user = userRepository.findOneThrowable(newBlog.getOwnerId());
         final Blog blog = NewBlogMapper.map(newBlog);
         blog.setOwner(user);

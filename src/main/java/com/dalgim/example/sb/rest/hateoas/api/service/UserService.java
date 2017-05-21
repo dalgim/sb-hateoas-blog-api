@@ -30,7 +30,7 @@ public class UserService extends AbstractService<User, UserResource, UserControl
         Preconditions.checkNotNull(id, "User id cannot be null.");
 
         final User user = userRepository.findOne(id);
-        UserResource userResource = resourceAssembler.toResource(user);
+        UserResource userResource = toResource(userRepository.findOne(id));
         for (Blog blog : user.getBlogSet()) {
             userResource.add(blogResourceAssembler.linkToSingleResource(blog).withRel("authored-blogs"));
         }
@@ -43,7 +43,6 @@ public class UserService extends AbstractService<User, UserResource, UserControl
 
     public Link newUser(NewUser newUser) {
         Preconditions.checkNotNull(newUser, "New user object cannot be null.");
-
         final User user = NewUserMapper.map(newUser);
         userRepository.save(user);
         return resourceAssembler.linkToSingleResource(user);
