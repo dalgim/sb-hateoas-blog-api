@@ -1,7 +1,6 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
 import com.dalgim.example.sb.rest.hateoas.api.BlogController;
-import com.dalgim.example.sb.rest.hateoas.api.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Blog;
 import com.google.common.base.Preconditions;

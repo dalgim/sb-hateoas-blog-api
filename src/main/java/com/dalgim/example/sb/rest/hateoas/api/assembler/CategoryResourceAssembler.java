@@ -26,7 +26,7 @@ public class CategoryResourceAssembler extends AbstractResourceAssembler<Categor
 
     @Override
     protected CategoryResource instantiateResource(Category category) {
-         CategoryResource categoryResource = new CategoryResource();
+        CategoryResource categoryResource = new CategoryResource();
         categoryResource.setCreatedDate(category.getCreatedDateTime());
         categoryResource.setLastUpdateDate(category.getUpdatedDateTime());
         categoryResource.setName(category.getName());

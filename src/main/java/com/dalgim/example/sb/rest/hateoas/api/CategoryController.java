@@ -1,6 +1,8 @@
 package com.dalgim.example.sb.rest.hateoas.api;
 
+import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
+import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final ArticleService articleService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CategoryResource> getById(@PathVariable final Long id) {
@@ -32,5 +35,10 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<CategoryResource>> getAll() {
         return ResponseEntity.ok(categoryService.getAll());
+    }
+
+    @RequestMapping(value = "/{id}/articles")
+    public ResponseEntity<Resources<ArticleResource>> getAllByCategoryId(@PathVariable Long id) {
+        return ResponseEntity.ok(articleService.getAllByCategoryId(id));
     }
 }

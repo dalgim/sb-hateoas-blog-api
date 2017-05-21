@@ -39,7 +39,7 @@ public class Blog extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
     private Set<Comment> commentSet = new HashSet<>();
 
-    private Blog() {}
+    Blog() {}
 
     public Blog(User owner) {
         this.owner = owner;

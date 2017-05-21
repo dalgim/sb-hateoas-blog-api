@@ -1,6 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas;
 
 import com.dalgim.example.sb.rest.hateoas.entity.Blog;
+import com.dalgim.example.sb.rest.hateoas.entity.Category;
 import com.dalgim.example.sb.rest.hateoas.entity.User;
 import com.dalgim.example.sb.rest.hateoas.repository.BlogRepository;
 import com.dalgim.example.sb.rest.hateoas.repository.UserRepository;
@@ -30,38 +31,45 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
     private void initUsers() {
         System.out.println("Init users...");
 
-        User user1 = new User();
-        user1.setLogin("John.Smith");
-        user1.setFirstName("John");
-        user1.setLastName("Smith");
-        user1.setPassword("P@ssw0rd");
+        User user1 = createUser("John", "Smith");
         userRepository.save(user1);
-        Blog blog1 = new Blog(user1);
-        blog1.setName("JavaBlog1");
-        blog1.setDescription("JavaBlog1 description");
+        Blog blog1 = createBlog(user1, "JavaBlog1");
+        blog1.addCategory(createCategory("JavaCat1"));
+        blog1.addCategory(createCategory("JavaCat2"));
+        blog1.addCategory(createCategory("JavaCat3"));
         blogRepository.save(blog1);
-        Blog blog2 = new Blog(user1);
-        blog2.setName("JavaBlog2");
-        blog2.setDescription("JavaBlog2 description");
+        Blog blog2 = createBlog(user1, "JavaBlog2");
         blogRepository.save(blog2);
 
-        User user2 = new User();
-        user2.setLogin("Anna.Smith");
-        user2.setFirstName("Anna");
-        user2.setLastName("Smith");
-        user2.setPassword("P@ssw0rd");
+        User user2 = createUser("Anna", "Smith");
         userRepository.save(user2);
-        Blog blog3 = new Blog(user2);
-        blog3.setName("JavaBlog3");
-        blog3.setDescription("JavaBlog3 description");
+        Blog blog3 = createBlog(user2, "AngularBlog1");
         blogRepository.save(blog3);
 
-        User user3 = new User();
-        user3.setLogin("Harry.Brown");
-        user3.setFirstName("Harry");
-        user3.setLastName("Brown");
-        user3.setPassword("P@ssw0rd");
+        User user3 = createUser("Harry", "Brown");
         userRepository.save(user3);
     }
 
+    private User createUser(String firstName, String lastName) {
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setLogin(firstName + "." + lastName);
+        user.setPassword("P@ssw0rd");
+        return user;
+    }
+
+    private Blog createBlog(User owner, String name) {
+        Blog blog = new Blog(owner);
+        blog.setName(name);
+        blog.setDescription(name + " description");
+        return blog;
+    }
+
+    private Category createCategory(String name) {
+        Category category = new Category();
+        category.setName(name);
+        category.setDescription(name + " description");
+        return category;
+    }
 }
