@@ -26,9 +26,8 @@ public class BlogResourceAssembler extends AbstractResourceAssembler<Blog, BlogR
         Preconditions.checkNotNull(blog, "Blog cannot be null.");
 
         final BlogResource blogResource = createResourceWithId(blog.getId(), blog);
-
-        final Link owneredBlogs = linkTo(methodOn(BlogController.class).getAllCategoriesByBlogId(blog.getId())).withRel("categories");
-        blogResource.add(owneredBlogs);
+        final Link blogCategoriesList = linkTo(methodOn(BlogController.class).getAllCategoriesByBlogId(blog.getId())).withRel("categories");
+        blogResource.add(blogCategoriesList);
         return blogResource;
     }
 

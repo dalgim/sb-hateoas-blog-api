@@ -4,6 +4,7 @@ import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
 import com.dalgim.example.sb.rest.hateoas.api.service.BlogService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CategoryService;
+import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Resources;

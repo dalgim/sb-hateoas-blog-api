@@ -11,4 +11,5 @@ import java.util.Set;
 public interface ArticleRepository extends CrudRepository<Article, Long> {
 
     Set<Article> getAllByCategory_Id(Long categoryId);
+    Set<Article> getAllByAuthor_Id(Long authorId);
 }

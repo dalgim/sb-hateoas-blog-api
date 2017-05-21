@@ -27,10 +27,12 @@ public class UserResourceAssembler extends AbstractResourceAssembler<User, UserR
         Preconditions.checkNotNull(user, "User cannot be null.");
 
         final UserResource userResource = createResourceWithId(user.getId(), user);
-        final Link owneredBlogs = linkTo(methodOn(UserController.class).getAllByOwnerId(user.getId())).withRel("owner-blogs");
-        final Link userComments = linkTo(methodOn(UserController.class).getAllByUserId(user.getId())).withRel("user-comments");
-        userResource.add(owneredBlogs);
-        userResource.add(userComments);
+        final Link userBlogsList = linkTo(methodOn(UserController.class).getAllBlogsByOwnerId(user.getId())).withRel("blogs");
+        final Link userCommentsList = linkTo(methodOn(UserController.class).getAllCommentsByUserId(user.getId())).withRel("comments");
+        final Link userArticlesList = linkTo(methodOn(UserController.class).getAllArticlesByAuthorId(user.getId())).withRel("articles");
+        userResource.add(userBlogsList);
+        userResource.add(userCommentsList);
+        userResource.add(userArticlesList);
         return userResource;
     }
 

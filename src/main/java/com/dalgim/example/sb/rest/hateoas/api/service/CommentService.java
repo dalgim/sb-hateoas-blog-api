@@ -2,13 +2,12 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.CommentResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
-import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Comment;
+import com.dalgim.example.sb.rest.hateoas.repository.BlogRepository;
 import com.dalgim.example.sb.rest.hateoas.repository.CommentRepository;
 import com.dalgim.example.sb.rest.hateoas.repository.UserRepository;
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;

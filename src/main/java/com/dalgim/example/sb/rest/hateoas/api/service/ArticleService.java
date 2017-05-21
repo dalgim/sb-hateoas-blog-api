@@ -45,4 +45,12 @@ public class ArticleService {
         final List<ArticleResource> allArticleResources = articleResourceAssembler.toResources(allArticles);
         return new Resources<>(allArticleResources, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
     }
+
+    public Resources<ArticleResource> getAllByAuthorId(Long authorId) {
+        Preconditions.checkNotNull(authorId, "Author id cannot be null.");
+
+        final Set<Article> allArticles = articleRepository.getAllByAuthor_Id(authorId);
+        final List<ArticleResource> allArticleResources = articleResourceAssembler.toResources(allArticles);
+        return new Resources<>(allArticleResources, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+    }
 }

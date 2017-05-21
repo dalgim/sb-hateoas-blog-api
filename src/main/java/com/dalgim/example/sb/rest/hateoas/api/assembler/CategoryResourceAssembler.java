@@ -5,7 +5,11 @@ import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
 import com.dalgim.example.sb.rest.hateoas.entity.Category;
 import com.google.common.base.Preconditions;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by Mateusz Dalgiewicz on 09.05.2017.
@@ -21,7 +25,10 @@ public class CategoryResourceAssembler extends AbstractResourceAssembler<Categor
     public CategoryResource toResource(Category category) {
         Preconditions.checkNotNull(category, "Category cannot be null.");
 
-        return createResourceWithId(category.getId(), category);
+        final CategoryResource categoryResource = createResourceWithId(category.getId(), category);
+        final Link categoryArticlesLink = linkTo(methodOn(CategoryController.class).getAllByCategoryId(category.getId())).withRel("articles");
+        categoryResource.add(categoryArticlesLink);
+        return categoryResource;
     }
 
     @Override
