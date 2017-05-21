@@ -1,6 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.CommentResourceAssembler;
+import com.dalgim.example.sb.rest.hateoas.api.controller.CommentController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
 import com.dalgim.example.sb.rest.hateoas.persistance.repository.CommentRepository;
@@ -8,11 +9,9 @@ import com.dalgim.example.sb.rest.hateoas.persistance.repository.UserRepository;
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Resources;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,30 +20,26 @@ import java.util.Set;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CommentService {
+public class CommentService extends AbstractService<Comment, CommentResource, CommentController> {
 
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
-    private final CommentResourceAssembler commentResourceAssembler;
 
     public CommentResource getById(Long id) {
         Preconditions.checkNotNull(id, "Comment id cannot be null.");
 
         final Comment comment = commentRepository.findOne(id);
-        return commentResourceAssembler.toResource(comment);
+        return resourceAssembler.toResource(comment);
     }
 
     public Resources<CommentResource> getAll() {
-        final Iterable<Comment> allComment = commentRepository.findAll();
-        final List<CommentResource> allCommentResource = commentResourceAssembler.toResources(allComment);
-        return new Resources<>(allCommentResource, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+        return toResources(commentRepository.findAll());
     }
 
     public Resources<CommentResource> getAllByUserId(Long userId) {
         Preconditions.checkNotNull(userId, "User id cannot be null.");
 
         final Set<Comment> allCommentsByUserId = userRepository.findOne(userId).getCommentSet();
-        final List<CommentResource> commentResources = commentResourceAssembler.toResources(allCommentsByUserId);
-        return new Resources<>(commentResources, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+        return toResources(allCommentsByUserId);
     }
 }
