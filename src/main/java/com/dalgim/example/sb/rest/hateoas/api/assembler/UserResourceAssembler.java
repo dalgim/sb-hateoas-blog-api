@@ -1,8 +1,8 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
-import com.dalgim.example.sb.rest.hateoas.api.UserController;
+import com.dalgim.example.sb.rest.hateoas.api.controller.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
-import com.dalgim.example.sb.rest.hateoas.entity.User;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
 import com.google.common.base.Preconditions;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Link;

@@ -12,5 +12,4 @@ public class NewCategory {
 
     private String name;
     private String description;
-    private Long blogId;
 }

@@ -1,4 +1,4 @@
-package com.dalgim.example.sb.rest.hateoas.api;
+package com.dalgim.example.sb.rest.hateoas.api.controller;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;

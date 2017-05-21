@@ -1,6 +1,6 @@
-package com.dalgim.example.sb.rest.hateoas.repository;
+package com.dalgim.example.sb.rest.hateoas.persistance.repository;
 
-import com.dalgim.example.sb.rest.hateoas.entity.Category;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Category;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;

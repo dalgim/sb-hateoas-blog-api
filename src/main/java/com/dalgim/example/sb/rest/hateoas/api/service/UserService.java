@@ -2,19 +2,21 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.BlogResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.assembler.UserResourceAssembler;
+import com.dalgim.example.sb.rest.hateoas.api.mapper.NewUserMapper;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
-import com.dalgim.example.sb.rest.hateoas.entity.Blog;
-import com.dalgim.example.sb.rest.hateoas.entity.User;
-import com.dalgim.example.sb.rest.hateoas.repository.UserRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Blog;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.UserRepository;
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Mateusz Dalgiewicz on 12.05.2017.
@@ -43,5 +45,13 @@ public class UserService {
         final Iterable<User> allUser = userRepository.findAll();
         final List<UserResource> allUserResource = userResourceAssembler.toResources(allUser);
         return new Resources<>(allUserResource, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+    }
+
+    public Link newUser(NewUser newUser) {
+        Preconditions.checkNotNull(newUser, "New user object cannot be null.");
+
+        final User user = NewUserMapper.map(newUser);
+        userRepository.save(user);
+        return userResourceAssembler.linkToSingleResource(user);
     }
 }

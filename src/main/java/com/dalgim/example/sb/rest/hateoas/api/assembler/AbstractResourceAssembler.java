@@ -1,6 +1,6 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
-import com.dalgim.example.sb.rest.hateoas.entity.AbstractEntity;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.AbstractEntity;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;

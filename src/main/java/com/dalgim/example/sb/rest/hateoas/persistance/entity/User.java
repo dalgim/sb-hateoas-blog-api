@@ -1,4 +1,4 @@
-package com.dalgim.example.sb.rest.hateoas.entity;
+package com.dalgim.example.sb.rest.hateoas.persistance.entity;
 
 import lombok.Getter;
 import lombok.Setter;

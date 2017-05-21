@@ -1,8 +1,8 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
-import com.dalgim.example.sb.rest.hateoas.api.CommentController;
+import com.dalgim.example.sb.rest.hateoas.api.controller.CommentController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
-import com.dalgim.example.sb.rest.hateoas.entity.Comment;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
 import com.google.common.base.Preconditions;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.dalgim.example.sb.rest.hateoas.api;
+package com.dalgim.example.sb.rest.hateoas.api.controller;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
@@ -11,10 +11,14 @@ import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import com.dalgim.example.sb.rest.hateoas.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +60,13 @@ public class UserController {
     @RequestMapping(value = "/{id}/articles", method = RequestMethod.GET)
     public ResponseEntity<Resources<ArticleResource>> getAllArticlesByAuthorId(@PathVariable Long id) {
         return ResponseEntity.ok(articleService.getAllByAuthorId(id));
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> newUser(@RequestBody NewUser newUser) {
+        final Link newUserLink = userService.newUser(newUser);
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(HttpHeaders.LOCATION, newUserLink.getHref());
+        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
     }
 }

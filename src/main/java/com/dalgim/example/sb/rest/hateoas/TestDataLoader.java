@@ -1,15 +1,14 @@
 package com.dalgim.example.sb.rest.hateoas;
 
-import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
-import com.dalgim.example.sb.rest.hateoas.entity.Article;
-import com.dalgim.example.sb.rest.hateoas.entity.Blog;
-import com.dalgim.example.sb.rest.hateoas.entity.Category;
-import com.dalgim.example.sb.rest.hateoas.entity.Comment;
-import com.dalgim.example.sb.rest.hateoas.entity.User;
-import com.dalgim.example.sb.rest.hateoas.repository.ArticleRepository;
-import com.dalgim.example.sb.rest.hateoas.repository.BlogRepository;
-import com.dalgim.example.sb.rest.hateoas.repository.CategoryRepository;
-import com.dalgim.example.sb.rest.hateoas.repository.UserRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Article;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Blog;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Category;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.ArticleRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.BlogRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.CategoryRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationListener;

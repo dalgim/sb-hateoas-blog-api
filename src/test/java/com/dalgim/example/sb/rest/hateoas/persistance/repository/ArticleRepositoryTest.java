@@ -1,10 +1,10 @@
-package com.dalgim.example.sb.rest.hateoas.repository;
+package com.dalgim.example.sb.rest.hateoas.persistance.repository;
 
 import com.dalgim.example.sb.rest.hateoas.AppProfiles;
-import com.dalgim.example.sb.rest.hateoas.entity.Article;
-import com.dalgim.example.sb.rest.hateoas.entity.Category;
-import com.dalgim.example.sb.rest.hateoas.entity.Comment;
-import com.dalgim.example.sb.rest.hateoas.entity.User;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Article;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Category;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

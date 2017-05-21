@@ -2,8 +2,8 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.ArticleResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
-import com.dalgim.example.sb.rest.hateoas.entity.Article;
-import com.dalgim.example.sb.rest.hateoas.repository.ArticleRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Article;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.ArticleRepository;
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Resources;
