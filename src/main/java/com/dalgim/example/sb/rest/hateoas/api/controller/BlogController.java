@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ExposesResourceFor(BlogResource.class)
 @RestController
 @RequestMapping(value = "/blogs", produces = MediaType.APPLICATION_JSON_VALUE)
-public class BlogController {
+public class BlogController extends AbstractControllerCase {
 
     private final BlogService blogService;
     private final CategoryService categoryService;
@@ -49,9 +49,7 @@ public class BlogController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> newBlog(@RequestBody NewBlog newBlog) {
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        Link newBlogLink = blogService.newBlog(newBlog);
-        httpHeaders.add(HttpHeaders.LOCATION, newBlogLink.getHref());
-        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+        final HttpHeaders headers = locationHttpHeaders(blogService.newBlog(newBlog));
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 }

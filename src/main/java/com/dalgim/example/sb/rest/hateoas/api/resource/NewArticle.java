@@ -13,6 +13,6 @@ public class NewArticle {
     private String name;
     private String content;
     private String description;
-    private Long blogId;
     private Long categoryId;
+    private Long authorId;
 }

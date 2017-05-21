@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by Mateusz Dalgiewicz on 01.05.2017.
  */
-public interface CategoryRepository extends CrudRepository<Category, Long> {
+public interface CategoryRepository extends ThrowableRepository<Category, Long> {
 
     Set<Category> getAllByBlog_Id(Long id);
 }

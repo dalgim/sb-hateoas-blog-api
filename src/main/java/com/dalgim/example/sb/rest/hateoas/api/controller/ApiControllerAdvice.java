@@ -13,10 +13,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiControllerAdvice {
 
+    private static class Constants {
+        static String INTERNAL_ERROR_MSG = "Internal server error";
+    }
+
     @ExceptionHandler(EntityNotFoundRuntimeException.class)
     public ResponseEntity<ErrorResponse> entityNofFound(EntityNotFoundRuntimeException ex) {
         final ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> internalError(Exception ex) {
+        final ErrorResponse errorResponse = new ErrorResponse(Constants.INTERNAL_ERROR_MSG, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

@@ -1,11 +1,18 @@
 package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.assembler.ArticleResourceAssembler;
+import com.dalgim.example.sb.rest.hateoas.api.mapper.NewArticleMapper;
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticle;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Article;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Category;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
 import com.dalgim.example.sb.rest.hateoas.persistance.repository.ArticleRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.CategoryRepository;
+import com.dalgim.example.sb.rest.hateoas.persistance.repository.UserRepository;
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
@@ -23,6 +30,8 @@ import java.util.Set;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
     private final ArticleResourceAssembler articleResourceAssembler;
 
     public ArticleResource getById(Long id) {
@@ -52,5 +61,17 @@ public class ArticleService {
         final Set<Article> allArticles = articleRepository.getAllByAuthor_Id(authorId);
         final List<ArticleResource> allArticleResources = articleResourceAssembler.toResources(allArticles);
         return new Resources<>(allArticleResources, ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel());
+    }
+
+    public Link newArticle(NewArticle newArticle) {
+        Preconditions.checkNotNull(newArticle, "NewArticle object cannot be null.");
+
+        final Category category = categoryRepository.findOneThrowable(newArticle.getCategoryId());
+        final Article article = NewArticleMapper.map(newArticle);
+        category.addArticle(article);
+        final User user = userRepository.findOneThrowable(newArticle.getAuthorId());
+        article.setAuthor(user);
+        articleRepository.save(article);
+        return articleResourceAssembler.linkToSingleResource(article);
     }
 }

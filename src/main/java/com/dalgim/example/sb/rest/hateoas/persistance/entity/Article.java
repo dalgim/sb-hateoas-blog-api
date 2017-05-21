@@ -43,7 +43,7 @@ public class Article extends AbstractEntity {
     )
     private Set<Comment> commentSet = new HashSet<>();
 
-    private Article() {}
+    public Article() {}
 
     public Article(User author) {
         this.author = author;
