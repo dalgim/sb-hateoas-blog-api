@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserController {
+public class UserController extends AbstractControllerCase {
 
     private final UserService userService;
     private final BlogService blogService;
@@ -64,9 +64,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> newUser(@RequestBody NewUser newUser) {
-        final Link newUserLink = userService.newUser(newUser);
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(HttpHeaders.LOCATION, newUserLink.getHref());
-        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+        final HttpHeaders headers = locationHttpHeaders(userService.newUser(newUser));
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 }

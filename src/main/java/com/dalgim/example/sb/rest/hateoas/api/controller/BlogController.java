@@ -2,6 +2,7 @@ package com.dalgim.example.sb.rest.hateoas.api.controller;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewBlog;
 import com.dalgim.example.sb.rest.hateoas.api.service.BlogService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CategoryService;
@@ -31,6 +32,7 @@ public class BlogController extends AbstractControllerCase {
 
     private final BlogService blogService;
     private final CategoryService categoryService;
+    private final CommentService commentService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<BlogResource> getById(@PathVariable final Long id) {
@@ -51,5 +53,10 @@ public class BlogController extends AbstractControllerCase {
     public ResponseEntity<Void> newBlog(@RequestBody NewBlog newBlog) {
         final HttpHeaders headers = locationHttpHeaders(blogService.newBlog(newBlog));
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
+    public ResponseEntity<Resources<CommentResource>> getAllCommentsByBlogId(@PathVariable Long id) {
+        return ResponseEntity.ok(commentService.getAllByBlogId(id));
     }
 }

@@ -73,6 +73,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         blogRepository.save(blog2);
 
         User user2 = createUser("Anna", "Smith");
+        user2.addComment(new Comment("tadsasd", user1));
+        user2.addComment(new Comment("tadsasd1", user1));
+        user2.addComment(new Comment("tadsasd2", user1));
         userRepository.save(user2);
         Blog blog3 = createBlog(user2, "AngularBlog1");
         final Category angular1 = createCategory("Angular1");

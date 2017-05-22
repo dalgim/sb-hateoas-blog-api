@@ -1,6 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas.api.assembler;
 
 import com.dalgim.example.sb.rest.hateoas.api.controller.BlogController;
+import com.dalgim.example.sb.rest.hateoas.api.controller.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Blog;
 import com.google.common.base.Preconditions;
@@ -27,7 +28,9 @@ public class BlogResourceAssembler extends AbstractResourceAssembler<Blog, BlogR
 
         final BlogResource blogResource = createResourceWithId(blog.getId(), blog);
         final Link blogCategoriesList = linkTo(methodOn(BlogController.class).getAllCategoriesByBlogId(blog.getId())).withRel("categories");
+        final Link blogCommentsList = linkTo(methodOn(BlogController.class).getAllCommentsByBlogId(blog.getId())).withRel("comments");
         blogResource.add(blogCategoriesList);
+        blogResource.add(blogCommentsList);
         return blogResource;
     }
 

@@ -1,8 +1,10 @@
 package com.dalgim.example.sb.rest.hateoas.api.controller;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticle;
 import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;
+import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Link;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController extends AbstractControllerCase {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ArticleResource> getById(@PathVariable final Long id) {
@@ -42,5 +45,10 @@ public class ArticleController extends AbstractControllerCase {
     public ResponseEntity<Void> newArticle(@RequestBody NewArticle newArticle) {
         final HttpHeaders headers = locationHttpHeaders(articleService.newArticle(newArticle));
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
+    public ResponseEntity<Resources<CommentResource>> getAllCommentsByArticleId(@PathVariable Long id) {
+        return ResponseEntity.ok(commentService.getAllByArticleId(id));
     }
 }
