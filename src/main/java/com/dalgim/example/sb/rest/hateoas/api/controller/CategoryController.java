@@ -2,14 +2,18 @@ package com.dalgim.example.sb.rest.hateoas.api.controller;
 
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CategoryResource;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewCategory;
 import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ExposesResourceFor(CategoryResource.class)
 @RestController
 @RequestMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoryController {
+public class CategoryController extends AbstractControllerCase {
 
     private final CategoryService categoryService;
     private final ArticleService articleService;
@@ -31,10 +35,15 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getByid(id));
     }
 
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resources<CategoryResource>> getAll() {
         return ResponseEntity.ok(categoryService.getAll());
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> newCategory(@RequestBody NewCategory newCategory) {
+        final HttpHeaders headers = locationHttpHeaders(categoryService.newCategory(newCategory));
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}/articles")

@@ -27,9 +27,9 @@ public class Blog extends AbstractEntity {
     @Column(name = "DESCRIPTION")
     @Lob
     private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "blog", cascade = CascadeType.ALL)
     private Set<Category> categorySet = new HashSet<>();
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID")
     private User owner;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
