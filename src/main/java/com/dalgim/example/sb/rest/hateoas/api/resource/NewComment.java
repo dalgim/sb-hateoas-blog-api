@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 public class NewComment {
 
-    private String authorId;
+    private Long authorId;
     private String content;
 }

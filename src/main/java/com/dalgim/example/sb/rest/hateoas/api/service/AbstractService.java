@@ -3,10 +3,10 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 import com.dalgim.example.sb.rest.hateoas.api.assembler.AbstractResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.AbstractEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
-
 import java.util.List;
 
 /**
@@ -29,4 +29,10 @@ public abstract class AbstractService<E extends AbstractEntity, T extends Resour
     public void setResourceAssembler(AbstractResourceAssembler<E, T, K> resourceAssembler) {
         this.resourceAssembler = resourceAssembler;
     }
+
+    protected EntityLink<E> entityLink(E entity) {
+        final Link link = resourceAssembler.linkToSingleResource(entity);
+        return new EntityLink(entity, link);
+    }
+
 }
