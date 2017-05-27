@@ -9,15 +9,13 @@ import java.time.LocalDateTime
 class UserBuilder {
 
     static User user() {
-        return new User(
-                firstName: 'John',
-                lastName: 'Smith',
-                id: 1L,
-                login: 'John.Smith',
-                password: 'P@ssw0rd',
-                uuid: UUID.randomUUID().toString(),
-                createdDateTime: LocalDateTime.now(),
-                updatedDateTime: LocalDateTime.now(),
-        )
+        def user = new User()
+        user.createdDateTime = LocalDateTime.now()
+        user.updatedDateTime = LocalDateTime.now()
+        user.setLogin('John.Smith')
+        user.setFirstName('John')
+        user.setLastName('Smith')
+        user.setPassword('P@ssword')
+        return user
     }
 }

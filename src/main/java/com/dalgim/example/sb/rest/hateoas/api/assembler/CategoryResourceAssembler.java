@@ -24,7 +24,6 @@ public class CategoryResourceAssembler extends AbstractResourceAssembler<Categor
     @Override
     public CategoryResource toResource(Category category) {
         Preconditions.checkNotNull(category, "Category cannot be null.");
-
         final CategoryResource categoryResource = createResourceWithId(category.getId(), category);
         final Link categoryArticlesLink = linkTo(methodOn(CategoryController.class).getAllByCategoryId(category.getId())).withRel("articles");
         categoryResource.add(categoryArticlesLink);

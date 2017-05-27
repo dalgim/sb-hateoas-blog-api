@@ -25,7 +25,6 @@ public class ArticleResourceAssembler extends AbstractResourceAssembler<Article,
     @Override
     public ArticleResource toResource(Article article) {
         Preconditions.checkNotNull(article, "Article cannot be null.");
-
         final ArticleResource articleResource = createResourceWithId(article.getId(), article);
         final Link articleCommentsList = linkTo(methodOn(ArticleController.class).getAllCommentsByArticleId(article.getId())).withRel("comments");
         articleResource.add(articleCommentsList);

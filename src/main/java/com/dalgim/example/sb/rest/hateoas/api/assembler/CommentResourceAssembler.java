@@ -20,7 +20,6 @@ public class CommentResourceAssembler extends AbstractResourceAssembler<Comment,
     @Override
     public CommentResource toResource(Comment comment) {
         Preconditions.checkNotNull(comment, "Comment cannot be null");
-
         return createResourceWithId(comment.getId(), comment);
     }
 

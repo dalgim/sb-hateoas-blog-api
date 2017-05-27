@@ -1,6 +1,7 @@
 package com.dalgim.example.sb.rest.hateoas.persistance.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,20 +18,21 @@ import java.util.UUID;
  */
 @MappedSuperclass
 @Getter
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    protected Long id;
     @Column(name = "UUID", nullable = false)
-    private final String uuid;
+    protected final String uuid;
     @CreatedDate
     @Column(name = "CREATED_DATE_TIME", nullable = false)
-    private LocalDateTime createdDateTime;
+    protected LocalDateTime createdDateTime;
     @LastModifiedDate
     @Column(name = "LAST_UPDATE_DATE_TIME", nullable = false)
-    private LocalDateTime updatedDateTime;
+    protected LocalDateTime updatedDateTime;
 
     AbstractEntity() {
         uuid = UUID.randomUUID().toString();

@@ -36,7 +36,7 @@ public class BlogResourceAssembler extends AbstractResourceAssembler<Blog, BlogR
 
     @Override
     protected BlogResource instantiateResource(Blog blog) {
-       BlogResource blogResource = new BlogResource();
+        final BlogResource blogResource = new BlogResource();
         blogResource.setName(blog.getName());
         blogResource.setDescription(blog.getDescription());
         blogResource.setCreatedDate(blog.getCreatedDateTime());

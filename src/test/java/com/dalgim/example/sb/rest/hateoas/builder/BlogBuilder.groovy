@@ -15,7 +15,6 @@ class BlogBuilder {
         blog.id = 1L
         blog.createdDateTime = LocalDateTime.now()
         blog.updatedDateTime = LocalDateTime.now()
-        blog.uuid = UUID.randomUUID().toString()
         blog.addCategory(CategoryBuilder.category('JavaCategory1'))
         blog.addCategory(CategoryBuilder.category('JavaCategory2'))
         blog.addCategory(CategoryBuilder.category('JavaCategory3'))

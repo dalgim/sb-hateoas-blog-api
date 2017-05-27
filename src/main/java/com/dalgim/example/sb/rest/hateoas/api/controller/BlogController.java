@@ -10,7 +10,6 @@ import com.dalgim.example.sb.rest.hateoas.api.service.CategoryService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.ExposesResourceFor;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
