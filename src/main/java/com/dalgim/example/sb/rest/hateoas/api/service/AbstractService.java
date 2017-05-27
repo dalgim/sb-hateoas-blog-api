@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class AbstractService<E extends AbstractEntity, T extends ResourceSupport, K> {
 
-    protected AbstractResourceAssembler<E, T, K> resourceAssembler;
+    AbstractResourceAssembler<E, T, K> resourceAssembler;
 
     Resources<T> toResources(Iterable<E> items) {
         final List<T> resourceItems = resourceAssembler.toResources(items);
@@ -30,9 +30,9 @@ public abstract class AbstractService<E extends AbstractEntity, T extends Resour
         this.resourceAssembler = resourceAssembler;
     }
 
-    protected EntityLink<E> entityLink(E entity) {
+    EntityLink<E> entityLink(E entity) {
         final Link link = resourceAssembler.linkToSingleResource(entity);
-        return new EntityLink(entity, link);
+        return new EntityLink<>(entity, link);
     }
 
 }

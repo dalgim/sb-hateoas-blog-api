@@ -3,6 +3,7 @@ package com.dalgim.example.sb.rest.hateoas.api.controller;
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticle;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticleComment;
 import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;
 import com.dalgim.example.sb.rest.hateoas.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -50,5 +51,11 @@ public class ArticleController extends AbstractControllerCase {
     @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
     public ResponseEntity<Resources<CommentResource>> getAllCommentsByArticleId(@PathVariable Long id) {
         return ResponseEntity.ok(commentService.getAllByArticleId(id));
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST)
+    public ResponseEntity<Void> newComment(@RequestBody NewArticleComment newArticleComment) {
+        final HttpHeaders headers = locationHttpHeaders(articleService.addComment(newArticleComment));
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 }

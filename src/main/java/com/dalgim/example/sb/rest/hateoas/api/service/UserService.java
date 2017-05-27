@@ -4,8 +4,10 @@ import com.dalgim.example.sb.rest.hateoas.api.assembler.BlogResourceAssembler;
 import com.dalgim.example.sb.rest.hateoas.api.controller.UserController;
 import com.dalgim.example.sb.rest.hateoas.api.mapper.NewUserMapper;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewUserComment;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Blog;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
 import com.dalgim.example.sb.rest.hateoas.persistance.repository.UserRepository;
 import com.google.common.base.Preconditions;
@@ -25,6 +27,7 @@ public class UserService extends AbstractService<User, UserResource, UserControl
 
     private final UserRepository userRepository;
     private final BlogResourceAssembler blogResourceAssembler;
+    private final CommentService commentService;
 
     public UserResource getById(Long id) {
         Preconditions.checkNotNull(id, "User id cannot be null.");
@@ -46,5 +49,14 @@ public class UserService extends AbstractService<User, UserResource, UserControl
         final User user = NewUserMapper.map(newUser);
         userRepository.save(user);
         return resourceAssembler.linkToSingleResource(user);
+    }
+
+    public Link addComment(NewUserComment newUserComment) {
+        Preconditions.checkNotNull(newUserComment, "NewUserComment cannot be null.");
+
+        final EntityLink<Comment> commentEntityLink = commentService.newComment(newUserComment.getNewComment());
+        final User user = userRepository.findOneThrowable(newUserComment.getUserId());
+        user.addComment(commentEntityLink.entity());
+        return commentEntityLink.link();
     }
 }

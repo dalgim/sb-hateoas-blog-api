@@ -4,6 +4,7 @@ import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.BlogResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.CommentResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewUser;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewUserComment;
 import com.dalgim.example.sb.rest.hateoas.api.resource.UserResource;
 import com.dalgim.example.sb.rest.hateoas.api.service.ArticleService;
 import com.dalgim.example.sb.rest.hateoas.api.service.BlogService;
@@ -55,6 +56,12 @@ public class UserController extends AbstractControllerCase {
     @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
     public ResponseEntity<Resources<CommentResource>> getAllCommentsByUserId(@PathVariable Long id) {
         return ResponseEntity.ok(commentService.getAllByUserId(id));
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST)
+    public ResponseEntity<Void> newComment(@RequestBody NewUserComment newUserComment) {
+        final HttpHeaders headers = locationHttpHeaders(userService.addComment(newUserComment));
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}/articles", method = RequestMethod.GET)

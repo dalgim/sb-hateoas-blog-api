@@ -2,10 +2,13 @@ package com.dalgim.example.sb.rest.hateoas.api.service;
 
 import com.dalgim.example.sb.rest.hateoas.api.controller.ArticleController;
 import com.dalgim.example.sb.rest.hateoas.api.mapper.NewArticleMapper;
+import com.dalgim.example.sb.rest.hateoas.api.mapper.NewCommentMapper;
 import com.dalgim.example.sb.rest.hateoas.api.resource.ArticleResource;
 import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticle;
+import com.dalgim.example.sb.rest.hateoas.api.resource.NewArticleComment;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Article;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.Category;
+import com.dalgim.example.sb.rest.hateoas.persistance.entity.Comment;
 import com.dalgim.example.sb.rest.hateoas.persistance.entity.User;
 import com.dalgim.example.sb.rest.hateoas.persistance.repository.ArticleRepository;
 import com.dalgim.example.sb.rest.hateoas.persistance.repository.CategoryRepository;
@@ -28,6 +31,7 @@ public class ArticleService extends AbstractService<Article, ArticleResource, Ar
     private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final CommentService commentService;
 
     public ArticleResource getById(Long id) {
         Preconditions.checkNotNull(id, "Article id cannot be null.");
@@ -57,5 +61,13 @@ public class ArticleService extends AbstractService<Article, ArticleResource, Ar
         article.setAuthor(user);
         articleRepository.save(article);
         return resourceAssembler.linkToSingleResource(article);
+    }
+
+    public Link addComment(NewArticleComment newArticleComment) {
+        Preconditions.checkNotNull(newArticleComment, "NewArticleComment cannot be null.");
+        final EntityLink<Comment> commentEntityLink = commentService.newComment(newArticleComment.getNewComment());
+        final Article article = articleRepository.findOne(newArticleComment.getArticleId());
+        article.addComment(commentEntityLink.entity());
+        return commentEntityLink.link();
     }
 }
